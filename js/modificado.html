@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Voluntario</title>
+        <!--
+    Carga el núcleo de Firebase
+    JS SDK
+  -->
+  <script
+  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js">
+  </script>
+<!--
+  Agrega el manejo de
+  autenticación.
+-->
+<script
+  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js">
+  </script>
+<!--
+  Agrega el manejo de bases de
+  datos.
+-->
+<script
+  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js">
+  </script>
+<!--
+  Configura la app usando la
+  información del sitio de
+  Firebase.
+-->
+    <script src="js/init.js"></script>
+    <script src="js/modificar.js"></script>
+</head>
+<body>
+    <h1>Modificar Voluntario</h1>
+    <form id="formularioModificacion">
+        <!-- Campos del formulario -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <br>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" rows="4" required></textarea>
+        <br>
+
+        <label for="opciones">Opciones:</label>
+        <select id="opciones" required>
+            <option value="ambiental">Cuidado Ambiental</option>
+            <option value="adMayores">Ayuda a adultos mayores</option>
+            <option value="educacion">Educacion Preescolar</option>
+            <option value="refugio">Cuidado de refugio gatos</option>
+        </select>
+        <br>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" required>
+        <br>
+
+        <!-- Botón de guardar cambios -->
+        <button type="button" id="btnGuardar">Guardar Cambios</button>
+    </form>
+
+    <script>
+        // Función para llenar el formulario con los datos actuales
+        const llenarFormulario = () => {
+            const params = new URLSearchParams(window.location.search);
+            document.getElementById('nombre').value = params.get('nombre');
+            document.getElementById('email').value = params.get('email');
+            document.getElementById('descripcion').value = params.get('descripcion');
+            document.getElementById('opciones').value = params.get('opciones');
+            document.getElementById('fecha').value = params.get('fecha');
+        };
+
+        // Llama a la función al cargar la página
+        llenarFormulario();
+
+     // Agrega la lógica para guardar los cambios en la base de datos
+     const btnGuardar = document.getElementById('btnGuardar');
+    btnGuardar.addEventListener('click', () => {
+        const params = new URLSearchParams(window.location.search);
+        const docId = params.get('id');
+
+        // Obtiene los nuevos datos del formulario
+        const nuevosDatos = {
+            nombre: document.getElementById('nombre').value,
+            email: document.getElementById('email').value,
+            descripcion: document.getElementById('descripcion').value,
+            opciones: document.getElementById('opciones').value,
+            fecha: document.getElementById('fecha').value,
+        };
+
+        // Llama a la función para actualizar el voluntario en Firestore
+        actualizarVoluntario(docId, nuevosDatos);
+    });
+
+    const actualizarVoluntario = (docId, nuevosDatos) => {
+        voluntariosCollection.doc(docId).update({
+            PVoluntario: nuevosDatos
+        })
+        .then(() => {
+            console.log("Voluntario actualizado correctamente");
+            // Redirige a la página principal o donde prefieras
+            window.location.href = 'modificar.html';
+        })
+        .catch((error) => {
+            console.error("Error al actualizar el voluntario:", error);
+        });
+    };
+    </script>
+</body>
+</html>

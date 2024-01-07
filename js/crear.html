@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Voluntario</title>
+     
+  <!--
+    Carga el núcleo de Firebase
+    JS SDK
+  -->
+  <script
+  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js">
+  </script>
+<!--
+  Agrega el manejo de
+  autenticación.
+-->
+<script
+  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js">
+  </script>
+<!--
+  Agrega el manejo de bases de
+  datos.
+-->
+<script
+  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js">
+  </script>
+<!--
+  Configura la app usando la
+  información del sitio de
+  Firebase.
+-->
+<script  src="js/init.js"></script>
+    <script type="module" src="js/crear.js"></script>
+</head>
+<body>
+    <form id="crearVoluntario">
+        <h1>Añade nuevo voluntario</h1>
+        <!--Atributo 1-->
+        <label for="text">Nombre:</label>
+        <input type="text" placeholder="Nombre" id="nombreVoluntario" required>
+        <!--Atributo 2-->
+        <label for="email">Email:</label>
+        <input type="email" placeholder="Email" id="emailVoluntario" required>
+        <!--Atributo 3-->
+        <label for="descripcionVoluntario">Cuentanos sobre ti:</label>
+        <textarea id="descripcionVoluntario" rows="5" placeholder="¡Escribe aqui!" required></textarea>
+        <!--Atributo 4-->
+        <label for="opcionesVoluntario">En que campo te gustaria ser voluntario:</label>
+        <select id="opcionesVoluntario" name="opciones" required>
+            <option value="ambiental">Cuidado Ambiental</option>
+            <option value="adMayores">Ayuda a adultos mayores</option>
+            <option value="educacion">Educacion Preescolar</option>
+            <option value="refugio">Cuidado de refugio gatos</option>
+        </select>
+        <!--Atributo 5 Date-->
+        <label for="date">Escoge la fecha en la que deseas realizar tu servicio de voluntario</label>
+        <input type="date" id="fechaVoluntario" required>
+        <button id="botonAgregar">Enviar</button>
+        </form>
+        <script>
+            // Configura la fecha mínima y máxima 
+const fechaVoluntariadoInput = document.getElementById('fechaVoluntario');
+const hoy = new Date();
+const unAnioDespues = new Date();
+unAnioDespues.setFullYear(hoy.getFullYear() + 1);
+
+// Formatea las fechas en formato ISO (YYYY-MM-DD)
+const fechaMinima = hoy.toISOString().split('T')[0];
+const fechaMaxima = unAnioDespues.toISOString().split('T')[0];
+
+fechaVoluntariadoInput.min = fechaMinima;
+fechaVoluntariadoInput.max = fechaMaxima;
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticacion</title>
+  <!--
+    Carga el núcleo de Firebase
+    JS SDK
+  -->
+  <script
+  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js">
+  </script>
+<!--
+  Agrega el manejo de
+  autenticación.
+-->
+<script
+  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js">
+  </script>
+<!--
+  Agrega el manejo de bases de
+  datos.
+-->
+<script
+  src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js">
+  </script>
+<!--
+  Configura la app usando la
+  información del sitio de
+  Firebase.
+-->
+
+<script src="js/init.js">
+</script>
+</head>
+<body>
+  <a href="crear.html">Crear Voluntario</a>
+  <a href="ver.html">Ver Voluntarios</a>
+  <a href="modificar.html">Modificar Voluntario</a>
+  <a href="chat.html">Chat</a>
+    <h1>Sesión de:</h1>
+    <form name="forma">
+        <figure>
+            <img id="avatar" src=""
+              alt="Avatar">
+        </figure>
+        <p>
+        <label>Nombre 
+            <output name="Nombre"  id="nombreOutput"></output>
+        </label>
+        </p>
+        <p>
+        <label>Email 
+            <output name="Email" id="emailOutput"></output>
+        </label>
+        </p>
+            <button
+              type="button"
+              name="terminarSesión">
+              Terminar Sesión
+            </button>
+    </form>
+    <script src="js/inicio.js"></script>
+</body>
+</html>
